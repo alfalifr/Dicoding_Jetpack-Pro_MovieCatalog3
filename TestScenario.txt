@@ -1,0 +1,105 @@
+• Skenario
+    ○ Instrumented Test:
+        § DetailActivityTest:
+            □ showDetail:
+                ® On MainActivity, click first item appear in RecyclerView, then enter DetailActivity.
+                ® Assert loading progress bar should be gone.
+                ® Assert error TextView should be gone.
+                ® Assert title is displayed and not template.
+                ® Assert release date is displayed and not template.
+                ® Assert genres is displayed and not template.
+                ® Assert overview header is displayed.
+                ® Assert overview content is displayed and not template.
+            □ showDetailOnError:
+                ® On MainActivity, click first item appear in RecyclerView, then enter DetailActivity.
+                ® Assert loading progress bar should be gone.
+                ® Assert error TextView is displayed with text starts with 'Error:' and contains 'cause:'.
+                ® Assert overview header should be gone.
+                ® Assert overview content should be gone.
+        § MainActivityTest:
+            □ getShowList:
+                ® Assert RecyclerView is displayed and not empty.
+                ® Assert first item title is displayed and not template.
+                ® Assert first item release date is displayed and not template.
+                ® Assert loading progress bar should be gone.
+                ® Assert no data TextView should be gone.
+            □ getShowListOnError:
+                ® Assert RecyclerView should be gone.
+                ® Assert loading progress should be gone.
+                ® Assert no data TextView is displayed with text starts with 'Error:' and contains 'cause:'.
+            □ getShowListOnNoData:
+                ® Assert RecyclerView should be gone.
+                ® Assert loading progress should be gone.
+                ® Assert no data TextView is displayed with text same as R.string.no_data.
+
+    ○ Unit Testing:
+        § ShowApiRepoTesting:
+            □ getPopularMovieList:
+                ® Assert ShowDataSource.getPopularMovieList(null) is invoked.
+                ® Assert the result is Success.
+                ® Assert the result data equals dummy movie data.
+            □ getPopularTvList:
+                ® Assert ShowDataSource.getPopularTvList(null) is invoked.
+                ® Assert the result is Success.
+                ® Assert the result data equals dummy tv data.
+            □ getMovieDetail:
+                ® Assert ShowDataSource.getMovieDetail(null, data.show.id) is invoked.
+                ® Assert the result is Success.
+                ® Assert the result data equals dummy movie detail data.
+            □ getTvDetail:
+                ® Assert ShowDataSource.getTvDetail(null, data.show.id) is invoked.
+                ® Assert the result is Success.
+                ® Assert the result data equals dummy tv detail data.
+        § ShowDetailViewModelTest:
+            □ downloadMovieDetail:
+                ® Assert ShowRepo.getMovieDetail(null, data.id) is invoked.
+                ® Assert Observer.onChanged(movieDetail) is invoked.
+                ® Assert data from LiveData equals dummy movie detail data.
+            □ downloadTvDetail:
+                ® Assert ShowRepo.getTvDetail(null, data.id) is invoked.
+                ® Assert Observer.onChanged(tvDetail) is invoked.
+                ® Assert data from LiveData equals dummy tv detail data
+        § ShowListViewModelTest:
+            □ downloadPopularMovieList:
+                ® Assert ShowRepo.getPopularMovieList(null) is invoked.
+                ® Assert Observer.onChanged(listOf(movie)) is invoked.
+                ® Assert data from LiveData equals dummy movie data.
+            □ downloadPopularTvList:
+                ® Assert ShowRepo.getPopularTvList(null) is invoked.
+                ® Assert Observer.onChanged(listOf(tv)) is invoked.
+                ® Assert data from LiveData equals dummy tv data.
+
+    ○ Unit Testing (Robolectric):
+        § DetailActivityUnitTest:
+            □ showDetail:
+                ® Test starts straight in DetailActivity.
+                ® Assert loading progress bar should be gone.
+                ® Assert error TextView should be gone.
+                ® Assert title is displayed and not template.
+                ® Assert release date is displayed and not template.
+                ® Assert genres is displayed and not template.
+                ® Assert overview header is displayed.
+                ® Assert overview content is displayed and not template.
+            □ showDetailOnError:
+                ® Test starts straight in DetailActivity.
+                ® Assert loading progress bar should be gone.
+                ® Assert error TextView is displayed with text starts with 'Error:' and contains 'cause:'.
+                ® Assert overview header should be gone.
+                ® Assert overview content should be gone.
+        § MainActivityUnitTest:
+            □ getShowList:
+                ® Assert RecyclerView is displayed.
+                ® Assert RecyclerView's LayoutManger is not null.
+                ® Assert first item is displayed
+                ® Assert first item title is displayed and not template.
+                ® Assert first item release date is displayed and not template.
+                ® Assert loading progress bar should be gone.
+                ® Assert no data TextView should be gone.
+            □ getShowListOnError:
+                ® Assert RecyclerView should be gone but not null.
+                ® Assert loading progress bar should be gone.
+                ® Assert error TextView is displayed and shows error message.
+            □ getShowListOnNoData:
+                ® Assert RecyclerView should be gone but not null.
+                ® Assert loading progress bar should be gone.
+                ® Assert error TextView is displayed and shows no data message.
