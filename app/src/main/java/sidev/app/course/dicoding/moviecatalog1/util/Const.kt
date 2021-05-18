@@ -4,6 +4,8 @@ import sidev.app.course.dicoding.moviecatalog1.BuildConfig
 import java.io.Serializable
 
 object Const {
+    //const val TYPE_TV = 0
+    //const val TYPE_MOVIE = 1
     enum class ShowType: Serializable {
         TV {
             override fun getDetailUrl(id: String, lang: String): String = getTvDetailUrl(id, lang)

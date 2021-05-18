@@ -5,67 +5,41 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.databinding.PageShowListBinding
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
 import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowAdp
-import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
+import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.AsyncVm
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowListViewModel
 import sidev.lib.android.std.tool.util.`fun`.startAct
 
-
-class ShowListFragment: ShowListAbsFragment() {
-    private lateinit var showRepo: ShowRepo
-
-    override val adp: ShowAdp by lazy {
-        ShowAdp().apply {
-            setOnItemClick { _, data ->
-                startAct<DetailActivity>(
-                    Const.KEY_SHOW to data,
-                    Const.KEY_TYPE to type,
-                )
-            }
-        }
-    }
-    override val vm: ShowListViewModel by lazy {
-        ShowListViewModel.getInstance(this, requireActivity().application, showRepo, type)
-    }
-
-    override fun onGetArgs(args: Bundle) {
-        showRepo = args.getSerializable(Const.KEY_REPO) as? ShowRepo ?: AppConfig.defaultShowRepo
-    }
-
-    override fun onAfterVmConfigured() {
-        vm.apply {
-            showList.observe(this@ShowListFragment) {
-                adp.dataList = it
-                showLoading(false)
-                showNoData(it == null || it.isEmpty())
-                AppConfig.decUiAsync()
-            }
-            downloadShowPopularList(forceDownload = true)
-        }
-    }
-}
-
-/*
-class ShowListFragment: Fragment() {
+abstract class ShowListAbsFragment: Fragment() {
     private lateinit var binding: PageShowListBinding
+/*
     private lateinit var adp: ShowAdp
     private lateinit var vm: ShowListViewModel
-    private lateinit var type: Const.ShowType
     private lateinit var showRepo: ShowRepo
+ */
+    protected abstract val adp: RecyclerView.Adapter<*>
+    protected abstract val vm: AsyncVm
+    //private lateinit var showRepo: ShowRepo
+    protected var type: Const.ShowType = Const.ShowType.TV
+        private set
 
+    protected abstract fun onAfterVmConfigured()
+    protected open fun onGetArgs(args: Bundle) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
             type = getSerializable(Const.KEY_TYPE) as Const.ShowType
-            showRepo = getSerializable(Const.KEY_REPO) as? ShowRepo ?: AppConfig.defaultShowRepo
+            onGetArgs(this)
         }
 
     }
@@ -80,6 +54,7 @@ class ShowListFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+/*
         adp = ShowAdp().apply {
             setOnItemClick { _, data ->
                 startAct<DetailActivity>(
@@ -88,6 +63,7 @@ class ShowListFragment: Fragment() {
                 )
             }
         }
+ */
         binding.apply {
             rv.apply {
                 adapter = adp
@@ -95,7 +71,8 @@ class ShowListFragment: Fragment() {
             }
         }
 
-        vm = ShowListViewModel.getInstance(this, requireActivity().application, showRepo, type).apply {
+        //vm = ShowListViewModel.getInstance(this, requireActivity().application, showRepo, type).apply {
+        vm.apply {
             onPreAsyncTask {
                 AppConfig.incUiAsync()
                 showNoData(false)
@@ -106,29 +83,23 @@ class ShowListFragment: Fragment() {
                 showDataError(true, code, e)
                 AppConfig.decUiAsync()
             }
-            showList.observe(this@ShowListFragment) {
-                adp.dataList = it
-                showLoading(false)
-                showNoData(it == null || it.isEmpty())
-                AppConfig.decUiAsync()
-            }
-            downloadShowPopularList(forceDownload = true)
+            onAfterVmConfigured()
         }
     }
 
-    private fun showNoData(show: Boolean = true) {
+    protected fun showNoData(show: Boolean = true) {
         showDataAnomaly(show)
         binding.tvNoData.text = getString(R.string.no_data)
     }
 
     @Suppress("SameParameterValue")
-    private fun showDataError(show: Boolean = true, code: Int = -1, e: Throwable? = null) {
+    protected  fun showDataError(show: Boolean = true, code: Int = -1, e: Throwable? = null) {
         showDataAnomaly(show)
         val eClass = if(e != null) e::class.java.simpleName else "null"
         binding.tvNoData.text = getString(R.string.error_data, "$eClass ($code)", e?.message ?: "null")
     }
 
-    private fun showDataAnomaly(show: Boolean = true) = binding.apply {
+    protected  fun showDataAnomaly(show: Boolean = true) = binding.apply {
         if(show){
             tvNoData.visibility = View.VISIBLE
             rv.visibility = View.GONE
@@ -138,7 +109,7 @@ class ShowListFragment: Fragment() {
         }
     }
 
-    private fun showLoading(show: Boolean = true) = binding.apply {
+    protected  fun showLoading(show: Boolean = true) = binding.apply {
         if(show){
             pbLoading.visibility = View.VISIBLE
             rv.visibility = View.GONE
@@ -148,5 +119,3 @@ class ShowListFragment: Fragment() {
         }
     }
 }
-
- */

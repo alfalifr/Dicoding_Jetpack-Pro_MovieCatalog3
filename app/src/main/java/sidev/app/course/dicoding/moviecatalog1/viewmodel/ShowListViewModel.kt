@@ -2,6 +2,7 @@ package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
+import androidx.paging.PagingData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -36,7 +37,6 @@ class ShowListViewModel(
     val showList: LiveData<List<Show>>
         get()= mShowList
     private val mShowList: MutableLiveData<List<Show>> = MutableLiveData()
-
 
     fun downloadShowPopularList(forceDownload: Boolean = false){
         if(!forceDownload && mShowList.value != null) return

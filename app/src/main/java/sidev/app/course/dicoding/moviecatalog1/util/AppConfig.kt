@@ -7,6 +7,7 @@ import sidev.app.course.dicoding.moviecatalog1.data.datasource.ShowRemoteSource
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
 import sidev.app.course.dicoding.moviecatalog1.data.model.ShowDetail
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowApiRepo
+import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
 
 /**

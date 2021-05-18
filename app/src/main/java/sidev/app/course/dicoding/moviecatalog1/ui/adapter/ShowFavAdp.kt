@@ -11,21 +11,13 @@ import sidev.app.course.dicoding.moviecatalog1.data.model.Show
 import sidev.app.course.dicoding.moviecatalog1.util.ShowDiffUtil
 
 
-class ShowAdp: RecyclerView.Adapter<ShowViewHolder>(), ShowViewHolder.OnItemClick {
+class ShowFavAdp: PagingDataAdapter<Show, ShowViewHolder>(ShowDiffUtil), ShowViewHolder.OnItemClick {
     //RecyclerView.Adapter<ShowAdp.ViewHolder>() {
-
-    var dataList: List<Show>?= null
-        set(v) {
-            field = v
-            notifyDataSetChanged()
-        }
 
     private var onItemClick: ShowViewHolder.OnItemClick?= null //((pos: Int, data: Show) -> Unit)? = null
     fun setOnItemClick(l: ShowViewHolder.OnItemClick?) {
         onItemClick = l
     }
-
-    override fun getItemCount(): Int = dataList?.size ?: 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShowViewHolder {
         val binding = ItemMainListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -34,8 +26,9 @@ class ShowAdp: RecyclerView.Adapter<ShowViewHolder>(), ShowViewHolder.OnItemClic
 
     override fun onBindViewHolder(holder: ShowViewHolder, position: Int) {
         //when the `dataList` is null, then this method won't be invoked.
-        val data = dataList!![position]
-        holder.bind(data)
+        val data = getItem(position)
+        if(data != null)
+            holder.bind(data)
     }
 
     override fun onItemClick(pos: Int, data: Show) {

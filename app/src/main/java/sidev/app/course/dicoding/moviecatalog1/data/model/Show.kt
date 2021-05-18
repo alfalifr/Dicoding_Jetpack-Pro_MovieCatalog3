@@ -20,6 +20,7 @@ data class Show(
     val release: String,
     @SerializedName("vote_average")
     val rating: Double,
+    @Transient
     val type: Int = Const.ShowType.TV.ordinal,
 ): Serializable {
     fun imgUrl_300x450(): String = Const.getImgUrl_300x450(img)
