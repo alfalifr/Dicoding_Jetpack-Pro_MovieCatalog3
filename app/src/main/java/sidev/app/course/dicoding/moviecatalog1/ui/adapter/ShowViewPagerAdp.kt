@@ -10,14 +10,16 @@ import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 
 //TODO 18 Mei 2021: Add fragment instantiator to `createFragment()`
-class ViewPagerAdp(act: FragmentActivity, private val showRepo: ShowRepo): FragmentStateAdapter(act) {
+class ShowViewPagerAdp(
+    act: FragmentActivity,
+    private val onCreateFragment: (pos: Int) -> Fragment,
+): FragmentStateAdapter(act) {
     private val showTypes = Const.ShowType.values()
     override fun getItemCount(): Int = showTypes.size
 
-    override fun createFragment(position: Int): Fragment = ShowListFragment().apply {
-        arguments = Bundle().apply {
-            putSerializable(Const.KEY_TYPE, showTypes[position])
-            putSerializable(Const.KEY_REPO, showRepo)
-        }
+    override fun createFragment(position: Int): Fragment = onCreateFragment(position).apply {
+        val args = arguments ?: Bundle()
+        args.putSerializable(Const.KEY_TYPE, showTypes[position])
+        arguments = args
     }
 }

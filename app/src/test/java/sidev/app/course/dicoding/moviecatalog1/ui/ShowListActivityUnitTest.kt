@@ -19,19 +19,19 @@ import sidev.app.course.dicoding.moviecatalog1.RobolectricTestingUtil
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowDummyRepo
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowEmptyRepo
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowErrorRepo
-import sidev.app.course.dicoding.moviecatalog1.ui.activity.ListActivity
+import sidev.app.course.dicoding.moviecatalog1.ui.activity.ShowListActivity
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.P])
-class ListActivityUnitTest {
+class ShowListActivityUnitTest {
 
     val textMatcher = RobolectricTestingUtil.ViewMatchers::textMatchesAndDisplayed
 
     // The activity creation line can't be located in @Before because
     // it depends on TestingUtil.defaultShowRepo set first.
     // So the best way is to gather bolierplate code in this method.
-    private fun createActivity(): ListActivity = Robolectric.buildActivity(ListActivity::class.java)
+    private fun createActivity(): ShowListActivity = Robolectric.buildActivity(ShowListActivity::class.java)
         .create()
         .start()
         .resume()

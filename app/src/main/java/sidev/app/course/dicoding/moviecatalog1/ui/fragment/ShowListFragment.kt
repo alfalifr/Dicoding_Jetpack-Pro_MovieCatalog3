@@ -47,7 +47,7 @@ class ShowListFragment: ShowListAbsFragment() {
                 showNoData(it == null || it.isEmpty())
                 AppConfig.decUiAsync()
             }
-            downloadShowPopularList(forceDownload = true)
+            downloadShowPopularList()
         }
     }
 }

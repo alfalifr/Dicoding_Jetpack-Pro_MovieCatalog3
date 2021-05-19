@@ -18,13 +18,13 @@ import sidev.app.course.dicoding.moviecatalog1.data.datasource.ShowRemoteRetrofi
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowEmptyRepo
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowErrorRepo
-import sidev.app.course.dicoding.moviecatalog1.ui.activity.ListActivity
+import sidev.app.course.dicoding.moviecatalog1.ui.activity.ShowListActivity
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 
-class ListActivityTest {
+class ShowListActivityTest {
 
     @get:Rule
-    val actRule = ActivityScenarioRule(ListActivity::class.java)
+    val actRule = ActivityScenarioRule(ShowListActivity::class.java)
 
     @Before
     fun setup(){

@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".ui.activity.DetailActivity" />
 
-        <activity android:name=".ui.activity.ListActivity" />
+        <activity android:name=".ui.activity.ShowListActivity" />
+        <activity android:name=".ui.activity.ShowFavListActivity" />
     </application>
 
 </manifest>

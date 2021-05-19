@@ -9,6 +9,7 @@ import androidx.paging.liveData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
@@ -42,13 +43,15 @@ class ShowFavViewModel(
         cancelJob()
         doOnPreAsyncTask()
         job = GlobalScope.launch(Dispatchers.IO) {
-            val pager = Pager(PagingConfig(10)) {
+            val pager = Pager(PagingConfig(8)) {
                 when(type){
                     Const.ShowType.TV -> repo.getPopularTvList()
                     Const.ShowType.MOVIE -> repo.getPopularMovieList()
                 }
             }
-            mShowSrc.addSource(pager.liveData) { mShowSrc.postValue(it) }
+            withContext(Dispatchers.Main) {
+                mShowSrc.addSource(pager.liveData) { mShowSrc.postValue(it) }
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ class SplashActivity: AppCompatActivity() {
         setContentView(R.layout.act_splash)
 
         _ThreadUtil.delayRun(2000){
-            startAct<ListActivity>()
+            startAct<ShowListActivity>()
             finish()
         }
     }

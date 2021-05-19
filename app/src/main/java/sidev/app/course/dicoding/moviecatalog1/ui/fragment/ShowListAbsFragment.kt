@@ -41,7 +41,6 @@ abstract class ShowListAbsFragment: Fragment() {
             type = getSerializable(Const.KEY_TYPE) as Const.ShowType
             onGetArgs(this)
         }
-
     }
 
     override fun onCreateView(

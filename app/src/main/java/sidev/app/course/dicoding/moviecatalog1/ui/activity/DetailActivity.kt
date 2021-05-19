@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import org.jetbrains.anko.imageResource
 import sidev.app.course.dicoding.moviecatalog1.R
+import sidev.app.course.dicoding.moviecatalog1.data.db.ShowFavDb
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
+import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
 import sidev.app.course.dicoding.moviecatalog1.databinding.PageShowDetailBinding
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
@@ -18,6 +21,7 @@ class DetailActivity: AppCompatActivity() {
     private lateinit var showType: Const.ShowType
     private lateinit var vm: ShowDetailViewModel
     private val showRepo = AppConfig.defaultShowRepo
+    private var isFav = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,12 +41,20 @@ class DetailActivity: AppCompatActivity() {
             tvPb.text = getString(R.string.percent, show.rating)
             pbRating.max = 100
             pbRating.progress = show.rating.times(10).toInt()
+            btnFav.setOnClickListener {
+                if(isFav) {
+                    vm.deleteFav(show)
+                } else {
+                    vm.insertFav(show)
+                }
+            }
             Glide.with(this@DetailActivity)
                 .load(show.imgUrl_300x450())
                 .into(ivPoster)
         }
 
-        vm = ShowDetailViewModel.getInstance(this, application, showRepo, showType).apply {
+        val dao = ShowFavDb.getInstance(this).dao()
+        vm = ShowDetailViewModel.getInstance(this, application, showRepo, ShowFavRepo(dao), showType).apply {
             onPreAsyncTask {
                 AppConfig.incUiAsync()
                 showError(false)
@@ -72,7 +84,19 @@ class DetailActivity: AppCompatActivity() {
                 showLoading(false)
                 AppConfig.decUiAsync()
             }
-            downloadShowDetail(show.id)
+            isFav.observe(this@DetailActivity) {
+                if(it != null){
+                    this@DetailActivity.isFav = it
+                    binding.btnFav.imageResource = if(it) R.drawable.ic_heart_full else R.drawable.ic_heart
+                    showError(false)
+                    showLoading(false)
+                    AppConfig.decUiAsync()
+                }
+            }
+            multipleJob {
+                downloadShowDetail(show.id)
+                isFav(show.id)
+            }
         }
     }
 

@@ -3,6 +3,7 @@
     <string name="tv_shows">TV Shows</string>
     <string name="movies">Movies</string>
     <string name="show_list">Show List</string>
+    <string name="show_fav_list">Favourite Show List</string>
     <string name="show_detail">Show Detail</string>
     <string name="toast_check_connection">Please check internet your connection</string>
     <string name="title">Title</string>

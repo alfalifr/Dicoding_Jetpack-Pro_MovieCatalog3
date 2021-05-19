@@ -1,5 +1,5 @@
 package sidev.app.course.dicoding.moviecatalog1
-
+/*
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
@@ -61,3 +61,5 @@ object Dummy {
         return liveData
     }
 }
+
+ */

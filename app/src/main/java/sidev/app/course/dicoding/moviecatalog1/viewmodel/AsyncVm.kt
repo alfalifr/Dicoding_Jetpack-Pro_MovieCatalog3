@@ -6,7 +6,10 @@ import android.content.Context
 import androidx.annotation.CallSuper
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.jetbrains.anko.runOnUiThread
 
 /**
@@ -18,7 +21,12 @@ open class AsyncVm(app: Application?): ViewModel() {
     protected var ctx: Context? = app
         private set
 
+    private var isJobJoin = false
     protected var job: Job?= null
+        set(v){
+            if(!isJobJoin)
+                field = v
+        }
 
     /**
      * Executed before any async task in `this` runs.
@@ -52,5 +60,13 @@ open class AsyncVm(app: Application?): ViewModel() {
     }
     protected fun doCallNotSuccess(code: Int, e: Throwable?){
         onCallNotSuccess?.also { ctx?.runOnUiThread { it(code, e) } }
+    }
+
+    fun multipleJob(block: () -> Unit) {
+        job = GlobalScope.launch(Dispatchers.IO) {
+            isJobJoin = true
+            block()
+            isJobJoin = false
+        }
     }
 }
