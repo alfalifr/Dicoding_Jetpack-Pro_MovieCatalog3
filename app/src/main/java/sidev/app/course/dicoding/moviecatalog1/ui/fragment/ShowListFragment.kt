@@ -19,7 +19,7 @@ import sidev.lib.android.std.tool.util.`fun`.startAct
 
 
 class ShowListFragment: ShowListAbsFragment() {
-    private lateinit var showRepo: ShowRepo
+    private val showRepo = AppConfig.defaultShowRepo
 
     override val adp: ShowAdp by lazy {
         ShowAdp().apply {
@@ -33,10 +33,6 @@ class ShowListFragment: ShowListAbsFragment() {
     }
     override val vm: ShowListViewModel by lazy {
         ShowListViewModel.getInstance(this, requireActivity().application, showRepo, type)
-    }
-
-    override fun onGetArgs(args: Bundle) {
-        showRepo = args.getSerializable(Const.KEY_REPO) as? ShowRepo ?: AppConfig.defaultShowRepo
     }
 
     override fun onAfterVmConfigured() {

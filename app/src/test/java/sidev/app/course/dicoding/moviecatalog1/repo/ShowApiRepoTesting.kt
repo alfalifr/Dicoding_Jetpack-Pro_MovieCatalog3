@@ -9,6 +9,7 @@ import sidev.app.course.dicoding.moviecatalog1.data.datasource.ShowDataSource
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowApiRepo
 import sidev.app.course.dicoding.moviecatalog1.data.Success
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
+import sidev.app.course.dicoding.moviecatalog1.util.Dummy
 
 class ShowApiRepoTesting {
 
@@ -17,10 +18,10 @@ class ShowApiRepoTesting {
         private val remoteSrc: ShowDataSource by lazy { mock(ShowDataSource::class.java) }
         private val repo: ShowApiRepo by lazy { ShowApiRepo(remoteSrc) }
 
-        private val movie = AppConfig.dummyMovieItem
-        private val movieDetail = AppConfig.dummyMovieDetail
-        private val tv = AppConfig.dummyTvItem
-        private val tvDetail = AppConfig.dummyTvDetail
+        private val movie = Dummy.dummyMovieItem
+        private val movieDetail = Dummy.dummyMovieDetail
+        private val tv = Dummy.dummyTvItem
+        private val tvDetail = Dummy.dummyTvDetail
 
         @BeforeClass
         @JvmStatic
@@ -61,7 +62,7 @@ class ShowApiRepoTesting {
 
     @Test
     fun getMovieDetail(): Unit = runBlocking {
-        val data = AppConfig.dummyMovieDetail
+        val data = Dummy.dummyMovieDetail
 
         val detail = repo.getMovieDetail(null, data.show.id)
         verify(remoteSrc).getMovieDetail(null, data.show.id)
@@ -72,7 +73,7 @@ class ShowApiRepoTesting {
 
     @Test
     fun getTvDetail(): Unit = runBlocking {
-        val data = AppConfig.dummyTvDetail
+        val data = Dummy.dummyTvDetail
 
         val detail = repo.getTvDetail(null, data.show.id)
         verify(remoteSrc).getTvDetail(null, data.show.id)

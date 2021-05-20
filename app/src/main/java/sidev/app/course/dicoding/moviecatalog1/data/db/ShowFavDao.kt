@@ -8,6 +8,9 @@ import sidev.app.course.dicoding.moviecatalog1.util.Const
 
 @Dao
 interface ShowFavDao {
+    @Query("DELETE FROM show_fav")
+    fun clear()
+
     @Query("SELECT * FROM show_fav WHERE type = :type")
     fun getShows(type: Int): PagingSource<Int, Show>
     @Query("SELECT * FROM show_fav WHERE type = :type AND id = :id")

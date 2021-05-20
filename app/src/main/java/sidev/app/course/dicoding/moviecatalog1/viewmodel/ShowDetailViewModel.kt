@@ -2,9 +2,7 @@ package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import sidev.app.course.dicoding.moviecatalog1.data.model.ShowDetail
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.data.Success
@@ -13,6 +11,7 @@ import sidev.app.course.dicoding.moviecatalog1.data.model.Show
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.lib.`val`.SuppressLiteral
+import sidev.lib.android.std.tool.util.`fun`.loge
 
 class ShowDetailViewModel(
     c: Application?,
@@ -45,11 +44,11 @@ class ShowDetailViewModel(
     val isFav: LiveData<Boolean>
         get()= mIsFav
 
-    fun downloadShowDetail(id: String, forceDownload: Boolean = false){
-        if(!forceDownload && mShowDetail.value != null) return
+    fun downloadShowDetail(id: String, forceDownload: Boolean = false): Job? {
+        if(!forceDownload && mShowDetail.value != null) return null
         cancelJob()
         doOnPreAsyncTask()
-        job = GlobalScope.launch(Dispatchers.IO) {
+        val job = GlobalScope.launch(Dispatchers.IO, CoroutineStart.LAZY) {
             val result = when(type){
                 Const.ShowType.MOVIE -> showRepo.getMovieDetail(ctx, id)
                 Const.ShowType.TV -> showRepo.getTvDetail(ctx, id)
@@ -59,16 +58,20 @@ class ShowDetailViewModel(
                 is Failure -> doCallNotSuccess(result.code, result.e)
             }
         }
+        this.job = job
+        return job
     }
 
-    fun isFav(showId: String, forceLoad: Boolean = false) {
-        if(!forceLoad && mIsFav.value != null) return
+    fun isFav(showId: String, forceLoad: Boolean = false): Job? {
+        if(!forceLoad && mIsFav.value != null) return null
         cancelJob()
         doOnPreAsyncTask()
-        job = GlobalScope.launch(Dispatchers.IO) {
+        val job = GlobalScope.launch(Dispatchers.IO, CoroutineStart.LAZY) {
             val isFav = favRepo.isShowFav(type.ordinal, showId)
             mIsFav.postValue(isFav)
         }
+        this.job = job
+        return job
     }
 
     fun insertFav(show: Show) {

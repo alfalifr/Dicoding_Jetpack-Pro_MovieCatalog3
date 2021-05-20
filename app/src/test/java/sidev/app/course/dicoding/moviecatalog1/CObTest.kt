@@ -32,7 +32,9 @@ class CObTest {
             dao.getFavTv()
         }
 
-    //TODO ubah tipe data di dalam LiveData jadi PagingData
+
+
+    //
         pager.liveData.observeForever {
             it.
             it!!.filter {  }
@@ -63,3 +65,4 @@ object Dummy {
 }
 
  */
+//TODO 20 May 2021: Add unit testing for showFav repo and VM

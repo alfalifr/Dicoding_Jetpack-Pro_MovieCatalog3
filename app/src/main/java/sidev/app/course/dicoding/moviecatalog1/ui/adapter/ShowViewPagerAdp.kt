@@ -9,7 +9,6 @@ import sidev.app.course.dicoding.moviecatalog1.ui.fragment.ShowListFragment
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 
-//TODO 18 Mei 2021: Add fragment instantiator to `createFragment()`
 class ShowViewPagerAdp(
     act: FragmentActivity,
     private val onCreateFragment: (pos: Int) -> Fragment,

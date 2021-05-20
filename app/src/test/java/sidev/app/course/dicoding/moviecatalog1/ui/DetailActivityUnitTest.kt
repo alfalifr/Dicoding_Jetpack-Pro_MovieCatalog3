@@ -21,6 +21,7 @@ import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowErrorRepo
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Const
+import sidev.app.course.dicoding.moviecatalog1.util.Dummy
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.P])
@@ -34,7 +35,7 @@ class DetailActivityUnitTest {
     private fun createActivity(): DetailActivity = Robolectric.buildActivity(
         DetailActivity::class.java,
         Intent().apply {
-            putExtra(Const.KEY_SHOW, AppConfig.dummyMovieItem)
+            putExtra(Const.KEY_SHOW, Dummy.dummyMovieItem)
             putExtra(Const.KEY_TYPE, Const.ShowType.MOVIE)
         }
     )
@@ -53,7 +54,7 @@ class DetailActivityUnitTest {
     fun showDetail(){
         // Use dummy repo because Robolectric can't integrate with Espresso Idling Resource.
         AppConfig.defaultShowRepo = ShowDummyRepo
-        val data = AppConfig.dummyMovieDetail
+        val data = Dummy.dummyMovieDetail
 
         val act = createActivity()
 

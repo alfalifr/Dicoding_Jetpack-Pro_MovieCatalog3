@@ -16,30 +16,22 @@ import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowAdp
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.AsyncVm
-import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowListViewModel
-import sidev.lib.android.std.tool.util.`fun`.startAct
+import sidev.lib.android.std.tool.util.`fun`.loge
 
 abstract class ShowListAbsFragment: Fragment() {
     private lateinit var binding: PageShowListBinding
-/*
-    private lateinit var adp: ShowAdp
-    private lateinit var vm: ShowListViewModel
-    private lateinit var showRepo: ShowRepo
- */
+
     protected abstract val adp: RecyclerView.Adapter<*>
     protected abstract val vm: AsyncVm
-    //private lateinit var showRepo: ShowRepo
     protected var type: Const.ShowType = Const.ShowType.TV
         private set
 
     protected abstract fun onAfterVmConfigured()
-    protected open fun onGetArgs(args: Bundle) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.apply {
             type = getSerializable(Const.KEY_TYPE) as Const.ShowType
-            onGetArgs(this)
         }
     }
 
@@ -53,16 +45,6 @@ abstract class ShowListAbsFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-/*
-        adp = ShowAdp().apply {
-            setOnItemClick { _, data ->
-                startAct<DetailActivity>(
-                    Const.KEY_SHOW to data,
-                    Const.KEY_TYPE to type,
-                )
-            }
-        }
- */
         binding.apply {
             rv.apply {
                 adapter = adp
@@ -70,9 +52,9 @@ abstract class ShowListAbsFragment: Fragment() {
             }
         }
 
-        //vm = ShowListViewModel.getInstance(this, requireActivity().application, showRepo, type).apply {
         vm.apply {
             onPreAsyncTask {
+                loge("onPreAsyncTask() AppConfig.incUiAsync()")
                 AppConfig.incUiAsync()
                 showNoData(false)
                 showLoading()

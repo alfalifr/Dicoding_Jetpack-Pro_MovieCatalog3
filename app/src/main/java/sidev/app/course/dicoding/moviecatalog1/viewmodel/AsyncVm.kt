@@ -31,7 +31,7 @@ open class AsyncVm(app: Application?): ViewModel() {
     /**
      * Executed before any async task in `this` runs.
      */
-    private var onPreAsyncTask: (() -> Unit)?= null
+    protected var onPreAsyncTask: (() -> Unit)?= null
     private var onCallNotSuccess: ((code: Int, e: Throwable?) -> Unit)?= null
 
     /**
@@ -62,10 +62,24 @@ open class AsyncVm(app: Application?): ViewModel() {
         onCallNotSuccess?.also { ctx?.runOnUiThread { it(code, e) } }
     }
 
-    fun multipleJob(block: () -> Unit) {
+    fun multipleJob(lazyBlock: () -> List<Job?>) {
+        cancelJob()
+        isJobJoin = false
         job = GlobalScope.launch(Dispatchers.IO) {
             isJobJoin = true
-            block()
+            val jobs = lazyBlock()
+            if(jobs.isEmpty()) return@launch
+            val firstJob = jobs.first()
+            var prevJob = firstJob
+            for(i in 1 until jobs.size) {
+                val currJob = jobs[i]
+                prevJob?.invokeOnCompletion { currJob?.start() }
+                    ?: run {
+                        currJob?.start()
+                    }
+                prevJob = currJob
+            }
+            firstJob?.start()
             isJobJoin = false
         }
     }

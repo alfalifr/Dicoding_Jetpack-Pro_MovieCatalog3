@@ -44,14 +44,14 @@ class ShowListActivityTest {
         onView(withId(R.id.rv)).apply {
             // Assert RecyclerView is displayed and not empty
             check(
-                AndroidTestingUtil.RecyclerViewAssertion.isChildInPositionDisplayed(
+                AndroidTestingUtil.RecyclerViewAssertion.isChildInPositionMatched(
                     0, ViewMatchers.isDisplayed()
                 )
             )
             // Assert first item title is displayed and not template
             val strTitle = ApplicationProvider.getApplicationContext<Context>().getString(R.string.title)
             check(
-                AndroidTestingUtil.RecyclerViewAssertion.isChildIdInPositionDisplayed(
+                AndroidTestingUtil.RecyclerViewAssertion.isChildIdInPositionMatched(
                     0, R.id.tv_title,
                     AndroidTestingUtil.ViewMatchers.textMatchesAndDisplayed {
                         it.isNotBlank() && it != strTitle
@@ -61,7 +61,7 @@ class ShowListActivityTest {
             // Assert first item release date is displayed and not template
             val relDatTitle = ApplicationProvider.getApplicationContext<Context>().getString(R.string.release_date)
             check(
-                AndroidTestingUtil.RecyclerViewAssertion.isChildIdInPositionDisplayed(
+                AndroidTestingUtil.RecyclerViewAssertion.isChildIdInPositionMatched(
                     0, R.id.tv_release,
                     AndroidTestingUtil.ViewMatchers.textMatchesAndDisplayed {
                         it.isNotBlank() && it != relDatTitle

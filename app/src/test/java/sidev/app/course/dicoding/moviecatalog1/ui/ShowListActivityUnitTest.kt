@@ -21,6 +21,7 @@ import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowEmptyRepo
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowErrorRepo
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.ShowListActivity
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
+import sidev.app.course.dicoding.moviecatalog1.util.Dummy
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.P])
@@ -47,7 +48,7 @@ class ShowListActivityUnitTest {
     fun getShowList(){
         // Use dummy repo because Robolectric can't integrate with Espresso Idling Resource.
         AppConfig.defaultShowRepo = ShowDummyRepo
-        val data = AppConfig.dummyTvItem
+        val data = Dummy.dummyTvItem
 
         val act = createActivity()
 

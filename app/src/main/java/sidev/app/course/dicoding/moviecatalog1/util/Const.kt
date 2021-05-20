@@ -4,8 +4,6 @@ import sidev.app.course.dicoding.moviecatalog1.BuildConfig
 import java.io.Serializable
 
 object Const {
-    //const val TYPE_TV = 0
-    //const val TYPE_MOVIE = 1
     enum class ShowType: Serializable {
         TV {
             override fun getDetailUrl(id: String, lang: String): String = getTvDetailUrl(id, lang)
@@ -31,7 +29,8 @@ object Const {
     private const val ENDPOINT_IMG = "$ENDPOINT_PUBLIC/t/p"
     private const val ENDPOINT_IMG_300x450 = "$ENDPOINT_IMG/w300_and_h450_bestv2"
     private const val ENDPOINT_IMG_533x300 = "$ENDPOINT_IMG/w533_and_h300_bestv2"
-
+    //2c0f358fb74aa907fcc1f8adca770ac3
+    //https://api.themoviedb.org/3/tv/85271?api_key=2c0f358fb74aa907fcc1f8adca770ac3
     val API_KEY: String
         get()= BuildConfig.API_KEY
 

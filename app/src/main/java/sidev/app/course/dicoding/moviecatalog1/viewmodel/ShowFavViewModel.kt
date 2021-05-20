@@ -14,6 +14,7 @@ import sidev.app.course.dicoding.moviecatalog1.data.model.Show
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.lib.`val`.SuppressLiteral
+import sidev.lib.android.std.tool.util.`fun`.loge
 
 class ShowFavViewModel(
     private val repo: ShowFavRepo,
@@ -41,6 +42,7 @@ class ShowFavViewModel(
     fun queryFavList(forceLoad: Boolean = false) {
         if(!forceLoad && mShowSrc.value != null) return
         cancelJob()
+        loge("queryFavList() AppConfig.incUiAsync() onPreAsyncTask= $onPreAsyncTask")
         doOnPreAsyncTask()
         job = GlobalScope.launch(Dispatchers.IO) {
             val pager = Pager(PagingConfig(8)) {

@@ -1,9 +1,13 @@
 package sidev.app.course.dicoding.moviecatalog1.data.model
 
+import com.google.gson.ExclusionStrategy
+import com.google.gson.FieldAttributes
+import com.google.gson.GsonBuilder
 import com.google.gson.annotations.SerializedName
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import sidev.app.course.dicoding.moviecatalog1.util.Util
+import sidev.lib.android.std.tool.util.`fun`.loge
 
 /**
  * Only as mediator to [Show] data class. I won't change the structure of former [Show] data class for some reason:
@@ -32,7 +36,15 @@ object ShowDetailConverter: Converter<ResponseBody, ShowDetail> {
     override fun convert(value: ResponseBody): ShowDetail {
         val str = value.string()
         val detail = Util.gson.fromJson(str, ShowDetailResponse::class.java)
-        val show = Util.gson.fromJson(str, Show::class.java)
+        val show = GsonBuilder()
+            .addDeserializationExclusionStrategy(ShowDetailExclusionStrategy)
+            .create()
+            .fromJson(str, Show::class.java)
         return detail.toDetail(show)
     }
+}
+
+object ShowDetailExclusionStrategy: ExclusionStrategy {
+    override fun shouldSkipField(f: FieldAttributes?): Boolean = f?.name == "type"
+    override fun shouldSkipClass(clazz: Class<*>?): Boolean = false
 }

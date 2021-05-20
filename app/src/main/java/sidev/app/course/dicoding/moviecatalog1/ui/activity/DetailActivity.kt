@@ -8,12 +8,15 @@ import org.jetbrains.anko.imageResource
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.data.db.ShowFavDb
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
+import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowEmptyRepo
+import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowErrorRepo
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
 import sidev.app.course.dicoding.moviecatalog1.databinding.PageShowDetailBinding
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDurationString
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowDetailViewModel
+import sidev.lib.android.std.tool.util.`fun`.loge
 
 class DetailActivity: AppCompatActivity() {
     private lateinit var binding: PageShowDetailBinding
@@ -22,6 +25,7 @@ class DetailActivity: AppCompatActivity() {
     private lateinit var vm: ShowDetailViewModel
     private val showRepo = AppConfig.defaultShowRepo
     private var isFav = false
+    private var isError = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +68,7 @@ class DetailActivity: AppCompatActivity() {
                 showLoading(false)
                 showError(true, code, e)
                 AppConfig.decUiAsync()
+                isError = true
             }
             showDetail.observe(this@DetailActivity){
                 if(it != null){
@@ -80,6 +85,7 @@ class DetailActivity: AppCompatActivity() {
                             .into(ivBg)
                     }
                 }
+                isError = false
                 showError(false)
                 showLoading(false)
                 AppConfig.decUiAsync()
@@ -88,14 +94,16 @@ class DetailActivity: AppCompatActivity() {
                 if(it != null){
                     this@DetailActivity.isFav = it
                     binding.btnFav.imageResource = if(it) R.drawable.ic_heart_full else R.drawable.ic_heart
-                    showError(false)
                     showLoading(false)
+                    showError(isError)
                     AppConfig.decUiAsync()
                 }
             }
             multipleJob {
-                downloadShowDetail(show.id)
-                isFav(show.id)
+                listOf(
+                    downloadShowDetail(show.id),
+                    isFav(show.id)
+                )
             }
         }
     }

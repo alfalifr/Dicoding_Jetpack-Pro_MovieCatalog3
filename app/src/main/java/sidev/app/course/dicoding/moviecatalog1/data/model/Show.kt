@@ -1,6 +1,7 @@
 package sidev.app.course.dicoding.moviecatalog1.data.model
 
 import androidx.room.Entity
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.Util
@@ -18,6 +19,7 @@ data class Show(
     val img: String,
     @SerializedName("release_date", alternate = ["first_air_date"])
     val release: String,
+    @Expose
     @SerializedName("vote_average")
     val rating: Double,
     //@Transient

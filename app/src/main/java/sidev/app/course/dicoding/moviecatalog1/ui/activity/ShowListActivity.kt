@@ -12,22 +12,13 @@ import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 
 class ShowListActivity: ShowListAbsActivity() {
-    private lateinit var showRepo: ShowRepo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTitle(R.string.show_list)
     }
 
-    override fun onGetExtras(intent: Intent) {
-        showRepo = intent.getSerializableExtra(Const.KEY_REPO) as? ShowRepo ?: AppConfig.defaultShowRepo
-    }
-
-    override fun createFragment(pos: Int): Fragment = ShowListFragment().apply {
-        arguments = Bundle().apply {
-            putSerializable(Const.KEY_REPO, showRepo)
-        }
-    }
+    override fun createFragment(pos: Int): Fragment = ShowListFragment()
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_option, menu)

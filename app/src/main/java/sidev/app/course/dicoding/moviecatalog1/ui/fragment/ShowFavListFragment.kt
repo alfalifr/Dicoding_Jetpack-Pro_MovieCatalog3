@@ -43,13 +43,11 @@ class ShowFavListFragment: ShowListAbsFragment() {
             var data2: PagingData<Show>? = null
             adp.addLoadStateListener {
                 showNoData(data2 == null || adp.itemCount == 0)
-                loge("adp.itemCount= ${adp.itemCount}")
             }
             showSrc.observe(this@ShowFavListFragment) { data ->
                 data2 = data
                 adp.submitData(lifecycle, data)
                 showLoading(false)
-                AppConfig.decUiAsync()
             }
             queryFavList()
         }

@@ -20,14 +20,11 @@ abstract class ShowListAbsActivity: AppCompatActivity() {
     private lateinit var vpAdp: ShowViewPagerAdp
 
     protected abstract fun createFragment(pos: Int): Fragment
-    protected open fun onGetExtras(intent: Intent) {}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = PageShowMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        onGetExtras(intent)
 
         vpAdp = ShowViewPagerAdp(this, this::createFragment)
 

@@ -16,8 +16,8 @@ import sidev.app.course.dicoding.moviecatalog1.UnitTestingUtil.waitForValue
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.data.Success
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
-import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Const
+import sidev.app.course.dicoding.moviecatalog1.util.Dummy
 import sidev.lib.`val`.SuppressLiteral
 
 class ShowListViewModelTest {
@@ -26,8 +26,8 @@ class ShowListViewModelTest {
         // These props are lazy val so there's no way the value will be changed after initialization.
         private val repo: ShowRepo by lazy { mock(ShowRepo::class.java) }
 
-        private val movie = AppConfig.dummyMovieItem
-        private val tv = AppConfig.dummyTvItem
+        private val movie = Dummy.dummyMovieItem
+        private val tv = Dummy.dummyTvItem
 
         @BeforeClass
         @JvmStatic
