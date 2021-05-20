@@ -1,6 +1,5 @@
 package sidev.app.course.dicoding.moviecatalog1.data.db
 
-import androidx.paging.DataSource
 import androidx.paging.PagingSource
 import androidx.room.*
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show

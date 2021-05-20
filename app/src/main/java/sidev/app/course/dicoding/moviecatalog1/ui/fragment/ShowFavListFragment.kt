@@ -1,19 +1,14 @@
 package sidev.app.course.dicoding.moviecatalog1.ui.fragment
 
 import android.os.Bundle
-import androidx.arch.core.util.Function
-import androidx.paging.CombinedLoadStates
 import androidx.paging.PagingData
-import androidx.recyclerview.widget.RecyclerView
 import sidev.app.course.dicoding.moviecatalog1.data.db.ShowFavDb
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
 import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowFavAdp
-import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowFavViewModel
-import sidev.lib.android.std.tool.util.`fun`.loge
 import sidev.lib.android.std.tool.util.`fun`.startAct
 
 class ShowFavListFragment: ShowListAbsFragment() {

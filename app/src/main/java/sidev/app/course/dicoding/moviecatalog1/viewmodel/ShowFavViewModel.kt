@@ -1,6 +1,5 @@
 package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.*
 import androidx.paging.Pager
 import androidx.paging.PagingConfig

@@ -5,10 +5,9 @@ import org.junit.Assert.assertEquals
 import org.junit.BeforeClass
 import org.junit.Test
 import org.mockito.Mockito.*
+import sidev.app.course.dicoding.moviecatalog1.data.Success
 import sidev.app.course.dicoding.moviecatalog1.data.datasource.ShowDataSource
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowApiRepo
-import sidev.app.course.dicoding.moviecatalog1.data.Success
-import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Dummy
 
 class ShowApiRepoTesting {

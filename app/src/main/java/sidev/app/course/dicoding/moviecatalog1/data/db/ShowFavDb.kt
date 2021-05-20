@@ -12,7 +12,7 @@ abstract class ShowFavDb: RoomDatabase() {
 
     companion object {
         private var instace: ShowFavDb?= null
-        const val DB_NAME = "user_db"
+        private const val DB_NAME = "user_db"
 
         fun getInstance(ctx: Context): ShowFavDb {
             if(instace == null){
@@ -27,8 +27,5 @@ abstract class ShowFavDb: RoomDatabase() {
             return instace!!
         }
 
-        fun clearInstance(){
-            instace = null
-        }
     }
 }

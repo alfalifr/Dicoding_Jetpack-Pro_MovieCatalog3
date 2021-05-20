@@ -53,7 +53,6 @@ object Const {
     const val KEY_API_KEY = "api_key"
     const val KEY_PAGE = "page"
 
-    const val KEY_REPO = "repo"
     const val KEY_TYPE = "type"
     const val KEY_SHOW = "show"
     const val KEY_RESULTS = "results"

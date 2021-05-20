@@ -2,15 +2,14 @@ package sidev.app.course.dicoding.moviecatalog1.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.*
-import androidx.paging.PagingData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import sidev.app.course.dicoding.moviecatalog1.data.Failure
+import sidev.app.course.dicoding.moviecatalog1.data.Success
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
-import sidev.app.course.dicoding.moviecatalog1.data.Success
-import sidev.app.course.dicoding.moviecatalog1.data.Failure
 import sidev.lib.`val`.SuppressLiteral
 
 class ShowListViewModel(

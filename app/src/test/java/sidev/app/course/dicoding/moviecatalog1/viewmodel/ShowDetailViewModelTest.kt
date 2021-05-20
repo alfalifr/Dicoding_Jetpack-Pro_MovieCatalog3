@@ -30,8 +30,8 @@ class ShowDetailViewModelTest {
         private val movieDetail = Dummy.dummyMovieDetail
         private val tvDetail = Dummy.dummyTvDetail
 
-        private val dummyDeletedCount = 1
-        private val dummyFavBool = true
+        private const val dummyDeletedCount = 1
+        private const val dummyFavBool = true
         private val dummyShowFav = movieDetail.show
 
         @BeforeClass

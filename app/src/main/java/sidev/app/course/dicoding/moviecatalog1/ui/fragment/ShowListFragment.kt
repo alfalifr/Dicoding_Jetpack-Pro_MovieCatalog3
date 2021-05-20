@@ -1,19 +1,9 @@
 package sidev.app.course.dicoding.moviecatalog1.ui.fragment
 
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.GridLayoutManager
-import sidev.app.course.dicoding.moviecatalog1.R
-import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
-import sidev.app.course.dicoding.moviecatalog1.databinding.PageShowListBinding
 import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
 import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowAdp
-import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
-import sidev.app.course.dicoding.moviecatalog1.viewmodel.AsyncVm
+import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowListViewModel
 import sidev.lib.android.std.tool.util.`fun`.startAct
 

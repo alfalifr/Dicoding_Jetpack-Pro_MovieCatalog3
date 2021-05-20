@@ -7,7 +7,6 @@ import com.google.gson.annotations.SerializedName
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import sidev.app.course.dicoding.moviecatalog1.util.Util
-import sidev.lib.android.std.tool.util.`fun`.loge
 
 /**
  * Only as mediator to [Show] data class. I won't change the structure of former [Show] data class for some reason:

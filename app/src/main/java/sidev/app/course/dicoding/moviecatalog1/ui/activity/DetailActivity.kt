@@ -8,15 +8,12 @@ import org.jetbrains.anko.imageResource
 import sidev.app.course.dicoding.moviecatalog1.R
 import sidev.app.course.dicoding.moviecatalog1.data.db.ShowFavDb
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
-import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowEmptyRepo
-import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowErrorRepo
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
 import sidev.app.course.dicoding.moviecatalog1.databinding.PageShowDetailBinding
-import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
+import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.util.Util.getDurationString
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.ShowDetailViewModel
-import sidev.lib.android.std.tool.util.`fun`.loge
 
 class DetailActivity: AppCompatActivity() {
     private lateinit var binding: PageShowDetailBinding

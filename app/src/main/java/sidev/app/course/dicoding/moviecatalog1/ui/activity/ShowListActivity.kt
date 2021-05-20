@@ -6,10 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import sidev.app.course.dicoding.moviecatalog1.R
-import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.ui.fragment.ShowListFragment
-import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
-import sidev.app.course.dicoding.moviecatalog1.util.Const
 
 class ShowListActivity: ShowListAbsActivity() {
 

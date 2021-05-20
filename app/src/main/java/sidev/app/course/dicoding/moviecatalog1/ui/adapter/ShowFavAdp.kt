@@ -3,11 +3,8 @@ package sidev.app.course.dicoding.moviecatalog1.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import sidev.app.course.dicoding.moviecatalog1.R
-import sidev.app.course.dicoding.moviecatalog1.databinding.ItemMainListBinding
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
+import sidev.app.course.dicoding.moviecatalog1.databinding.ItemMainListBinding
 import sidev.app.course.dicoding.moviecatalog1.util.ShowDiffUtil
 
 

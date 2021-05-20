@@ -3,8 +3,6 @@ package sidev.app.course.dicoding.moviecatalog1
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.IdRes
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
@@ -12,12 +10,8 @@ import androidx.test.espresso.ViewAssertion
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.TypeSafeMatcher
-import sidev.lib.`val`.SuppressLiteral
 import sidev.lib.android.std.tool.util.`fun`.loge
 import sidev.lib.check.assertNotNull
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
 import androidx.test.espresso.action.ViewActions as AndroidViewActions
 import androidx.test.espresso.matcher.ViewMatchers as AndroidViewMathcers
 

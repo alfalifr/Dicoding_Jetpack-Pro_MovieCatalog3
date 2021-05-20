@@ -5,14 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import sidev.app.course.dicoding.moviecatalog1.R
-import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.databinding.PageShowListBinding
-import sidev.app.course.dicoding.moviecatalog1.ui.activity.DetailActivity
-import sidev.app.course.dicoding.moviecatalog1.ui.adapter.ShowAdp
 import sidev.app.course.dicoding.moviecatalog1.util.AppConfig
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.app.course.dicoding.moviecatalog1.viewmodel.AsyncVm
@@ -80,7 +76,7 @@ abstract class ShowListAbsFragment: Fragment() {
         binding.tvNoData.text = getString(R.string.error_data, "$eClass ($code)", e?.message ?: "null")
     }
 
-    protected  fun showDataAnomaly(show: Boolean = true) = binding.apply {
+    private fun showDataAnomaly(show: Boolean = true) = binding.apply {
         if(show){
             tvNoData.visibility = View.VISIBLE
             rv.visibility = View.GONE

@@ -1,17 +1,15 @@
 package sidev.app.course.dicoding.moviecatalog1.repo
 
 import android.content.Context
-import android.os.Build
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingSource
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.platform.app.InstrumentationRegistry
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
-import org.junit.*
-import org.junit.runner.RunWith
+import org.junit.AfterClass
+import org.junit.BeforeClass
+import org.junit.FixMethodOrder
+import org.junit.Test
 import org.junit.runners.MethodSorters
 import sidev.app.course.dicoding.moviecatalog1.data.db.ShowFavDao
 import sidev.app.course.dicoding.moviecatalog1.data.db.ShowFavDb

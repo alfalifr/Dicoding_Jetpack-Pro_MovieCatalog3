@@ -3,15 +3,14 @@ package sidev.app.course.dicoding.moviecatalog1.viewmodel
 import android.app.Application
 import androidx.lifecycle.*
 import kotlinx.coroutines.*
-import sidev.app.course.dicoding.moviecatalog1.data.model.ShowDetail
-import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
-import sidev.app.course.dicoding.moviecatalog1.data.Success
 import sidev.app.course.dicoding.moviecatalog1.data.Failure
+import sidev.app.course.dicoding.moviecatalog1.data.Success
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
+import sidev.app.course.dicoding.moviecatalog1.data.model.ShowDetail
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
+import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.util.Const
 import sidev.lib.`val`.SuppressLiteral
-import sidev.lib.android.std.tool.util.`fun`.loge
 
 class ShowDetailViewModel(
     c: Application?,
