@@ -31,6 +31,58 @@
                 ® Assert RecyclerView should be gone.
                 ® Assert loading progress should be gone.
                 ® Assert no data TextView is displayed with text same as R.string.no_data.
+        § ShowFavActivityTest:
+            □ showFavTest:
+                ® Clear database first.
+                ® Click item 1 to go to detail.
+                ® Press to like the show.
+                ® Back to main list.
+                ® Go to favourite list.
+                ® Assert item 1 is displayed in favourite.
+                ® Enter the detail page.
+                ® Dislike the show.
+                ® Back to favourite list.
+                ® Assert no data is displayed.
+                ® Assert 'No Data' TextView is displayed.
+                ® Assert loading bar is not displayed.
+        § ShowFavRepoTest:
+            □ insertFav:
+                ® Insert dummyMovie to database.
+                ® Insert dummyTv to database.
+                ® Query movie data based on dummyMovie.id.
+                ® Query TV data based on dummyTv.id.
+                ® Assert movie data equals to dummyMovie.
+                ® Assert TV data equals to dummyTv.
+            □ isShowFav:
+                ® Query dummyMovie favourite boolean.
+                ® Query dummyTv favourite boolean.
+                ® Query dummyMovie2 favourite boolean.
+                ® Query dummyTv2 favourite boolean.
+                ® Assert dummyMovie is favourite (boolean == true).
+                ® Assert dummyTv is favourite (boolean == true).
+                ® Assert dummyMovie2 is not favourite (boolean == false).
+                ® Assert dummyTv2 is not favourite (boolean == false).
+            □ getPopularMovieList:
+                ® Query favourite movie list.
+                ® Assert favourite movie list is not empty.
+                ® Assert favourite movie list equals to listOf(dummyMovie).
+            □ getPopularTvList:
+                ® Query favourite TV list.
+                ® Assert favourite TV list is not empty.
+                ® Assert favourite TV list equals to listOf(dummyTv).
+            □ deleteFav:
+                ® Delete dummyMovie from database and get the deleted count.
+                ® Delete dummyTv from database and get the deleted count.
+                ® Delete dummyMovie2 from database and get the deleted count.
+                ® Delete dummyTv2 from database and get the deleted count.
+                ® Assert dummyMovie deleted count equals to 1.
+                ® Assert dummyTv deleted count equals to 1.
+                ® Assert dummyMovie2 deleted count equals to 0.
+                ® Assert dummyTv2 deleted count equals to 0.
+                ® Query dummyMovie favourite boolean.
+                ® Query dummyTv favourite boolean.
+                ® Assert dummyMovie is not favourite anymore (boolean == false).
+                ® Assert dummyTv is not favourite anymore (boolean == false).
 
     ○ Unit Testing:
         § ShowApiRepoTesting:
@@ -53,12 +105,24 @@
         § ShowDetailViewModelTest:
             □ downloadMovieDetail:
                 ® Assert ShowRepo.getMovieDetail(null, data.id) is invoked.
-                ® Assert Observer.onChanged(movieDetail) is invoked.
+                ® Assert mockObserver.onChanged(movieDetail) is invoked.
                 ® Assert data from LiveData equals dummy movie detail data.
             □ downloadTvDetail:
                 ® Assert ShowRepo.getTvDetail(null, data.id) is invoked.
-                ® Assert Observer.onChanged(tvDetail) is invoked.
-                ® Assert data from LiveData equals dummy tv detail data
+                ® Assert mockObserver.onChanged(tvDetail) is invoked.
+                ® Assert data from LiveData equals dummy tv detail data.
+            □ insertFav:
+                ® Assert ShowFavRepo.insertFav(dummyShowFav) is invoked.
+                ® Assert mockFavObserver.onChanged(dummyFavBool) is invoked.
+                ® Assert data from LiveData equals dummy boolean data.
+            □ isFav:
+                ® Assert ShowFavRepo.isShowFav(dummyShowFav.type, dummyShowFav.id) is invoked.
+                ® Assert mockFavObserver.onChanged(dummyFavBool) is invoked.
+                ® Assert data from LiveData equals dummy boolean data.
+            □ deleteFav:
+                ® Assert ShowFavRepo.deleteFav(dummyShowFav) is invoked.
+                ® Assert mockFavObserver.onChanged(!dummyFavBool) is invoked.
+                ® Assert data from LiveData equals opposite of dummy boolean data.
         § ShowListViewModelTest:
             □ downloadPopularMovieList:
                 ® Assert ShowRepo.getPopularMovieList(null) is invoked.

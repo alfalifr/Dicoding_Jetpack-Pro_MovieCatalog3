@@ -12,7 +12,6 @@ import org.mockito.Mockito.*
 import sidev.app.course.dicoding.moviecatalog1.UnitTestingUtil.waitForValue
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowRepo
 import sidev.app.course.dicoding.moviecatalog1.data.Success
-import sidev.app.course.dicoding.moviecatalog1.data.db.ShowFavDao
 import sidev.app.course.dicoding.moviecatalog1.data.model.Show
 import sidev.app.course.dicoding.moviecatalog1.data.model.ShowDetail
 import sidev.app.course.dicoding.moviecatalog1.data.repository.ShowFavRepo
@@ -45,7 +44,6 @@ class ShowDetailViewModelTest {
                 Success(tvDetail)
             )
 
-            //`when`(favRepo.insertFav(dummyShowFav)).thenReturn(Unit)
             `when`(favRepo.deleteFav(dummyShowFav)).thenReturn(dummyDeletedCount)
             `when`(favRepo.isShowFav(anyInt(), anyString())).thenReturn(dummyFavBool)
         }
@@ -107,8 +105,8 @@ class ShowDetailViewModelTest {
 
         val valFromLiveData = vm.isFav.waitForValue()
 
-        verify(mockFavObserver).onChanged(dummyFavBool)
         verify(favRepo).insertFav(dummyShowFav)
+        verify(mockFavObserver).onChanged(dummyFavBool)
 
         assertEquals(dummyFavBool, valFromLiveData)
     }
@@ -121,8 +119,8 @@ class ShowDetailViewModelTest {
 
         val valFromLiveData = vm.isFav.waitForValue()
 
-        verify(mockFavObserver).onChanged(dummyFavBool)
         verify(favRepo).isShowFav(dummyShowFav.type, dummyShowFav.id)
+        verify(mockFavObserver).onChanged(dummyFavBool)
 
         assertEquals(dummyFavBool, valFromLiveData)
     }
@@ -135,8 +133,8 @@ class ShowDetailViewModelTest {
 
         val valFromLiveData = vm.isFav.waitForValue()
 
-        verify(mockFavObserver).onChanged(!dummyFavBool)
         verify(favRepo).deleteFav(dummyShowFav)
+        verify(mockFavObserver).onChanged(!dummyFavBool)
 
         assertEquals(!dummyFavBool, valFromLiveData)
     }

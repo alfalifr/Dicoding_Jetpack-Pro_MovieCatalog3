@@ -71,7 +71,7 @@ class ShowFavActivityTest {
         //Go to favourite list
         Espresso.onView(ViewMatchers.withId(R.id.menu_fav)).perform(ViewActions.click())
 
-        //Assert item 1 is displayed
+        //Assert item 1 is displayed in favourite
         Espresso.onView(ViewMatchers.withId(R.id.rv)).check(
             AndroidTestingUtil.RecyclerViewAssertion.isChildInPositionMatched(
                 0, ViewMatchers.isDisplayed()
